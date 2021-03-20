@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="btc_cj",
-    version="0.0.1",
+    version="1.0.0",
     author="Wen",
     author_email="wenqinchao@gmail.com",
     description="A package interact with bitcoin node",
