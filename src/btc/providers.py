@@ -33,7 +33,6 @@ class HttpProvider(JSONBaseProvider):
     """
         An HTTP Provider for API request
         :param endpoint_uri: HTTP API URL base. Default value is ``"http://127.0.0.1:8332"``. Can also be configured via the ``BITCOIN_LOTUS_HTTP_PROVIDER_URI`` environment variable.
-        :param auth: Authorization string, default in ~/.lotus/token
         :return:
     """
 
