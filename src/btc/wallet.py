@@ -335,8 +335,11 @@ class Wallet:
         :param address_filter: If present, only return information on this address
         :return:
         """
+        params = [min_conf, include_empty, include_watch_only]
+        if address_filter:
+            params.append(address_filter)
         return self._provider.make_request(RPC.wallet_listReceivedByAddress,
-                                           [min_conf, include_empty, include_watch_only, address_filter], wallet)
+                                           params, wallet)
 
     def list_received_by_label(self, wallet: str, min_conf: int = 1, include_empty: bool = False,
                                include_watch_only: bool = False):
@@ -367,7 +370,7 @@ class Wallet:
                                            [block_hash, target_confirmations, include_watch_only, include_removed],
                                            wallet)
 
-    def list_transactions(self, wallet: str, label: str = None, count: int = 10, skip: int = 0,
+    def list_transactions(self, wallet: str, label: str = "*", count: int = 10, skip: int = 0,
                           include_watch_only: bool = False):
         """
         If a label name is provided, this will return only incoming transactions paying to addresses with the specified label.
