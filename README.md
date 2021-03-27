@@ -1,6 +1,6 @@
 # btc-cj
 A simple python package interacts with the bitcoin node, python version >=3.6 is recommend
-## install
+## Install
 ```
 pip3 install btc-cj
 ```
