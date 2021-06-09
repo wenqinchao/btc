@@ -491,8 +491,8 @@ Outputs:
 ```
 
 #### load_wallet
-The wallet needs to be reloaded after the bitcoind node restarts 
-Inputs:
+The wallet needs to be reloaded after the bitcoind node restarts <br/>
+**Inputs**:
 ```
 {
     "wallet":"nice"
