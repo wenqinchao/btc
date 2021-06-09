@@ -168,6 +168,7 @@ print(block)
   'nextblockhash': '000000000000000000042264a471acdf4b9b3cbd98e585072f1505f092b7d3d3'
 }
 ```
+verbosity = 2
 ```
 block = bitcoin.chain.get_block("00000000000000000004194093f23783768d7904234c0dbba53e85bce6ecd8b4",2)
 print(block)
@@ -400,7 +401,7 @@ print(block)
 
 # raw
 ## get_raw_transaction
-This function can't work if you did not set 'tindex=1' when you run bitcoind
+This function can't work if you did not set 'tindex=1' when you run bitcoind <br/>
 **Inputs**:
 ```
 "tx_id":"f68394a5fa08907fbdd049401a4da25b10bd57f9301822747a23830fe328de6e"
@@ -538,7 +539,7 @@ wallet encrypted; The keypool has been flushed and a new HD seed was generated (
 ```
 
 ## wallet_pass_phrase
-Unlock the wallet after transaction or sign in 'timeout' seconds
+Unlock the wallet after transaction or sign in 'timeout' seconds <br/>
 **Inputs**:
 ```
 {
