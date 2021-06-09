@@ -39,13 +39,13 @@ bitcoin = BitCoin(BitCoin.HttpProvider("your rpc username", "your rpc password",
 # chain
 
 ## get_block_chain_info
-Inputs:
+**Inputs**:
 ```None```
 ```
 chain_info = bitcoin.chain.get_block_chain_info()
 print(chain_info)
 ```
-Outputs:
+**Outputs**:
 ```
 {
   'chain': 'main',
@@ -91,29 +91,29 @@ Outputs:
 ```
 
 ## get_block_count
-Inputs:
+**Inputs**:
 ```None```
 ```
 block_count = bitcoin.chain.get_block_count()
 print(block_count)
 ```
-Outputs:
+**Outputs**:
 ```676487```
 
 ## get_latest_block_hash
-Inputs:
+**Inputs**:
 ```None```
 ```
 block_hash = bitcoin.chain.get_latest_block_hash()
 print(block_hash)
 ```
-Outputs:
+**Outputs**:
 ```
 "00000000000000000001568e72a26b2bed6507a2ad59a3693c1df544298aa290"
 ```
 
 ## get_block_hash
-Inputs:
+**Inputs**:
 ```
 {"height":676486}
 ```
@@ -121,13 +121,13 @@ Inputs:
 block_hash = bitcoin.chain.get_block_hash(676486)
 print(block_hash)
 ```
-Outputs:
+**Outputs**:
 ```
 "00000000000000000004194093f23783768d7904234c0dbba53e85bce6ecd8b4"
 ```
 
 ## get_block
-Inputs:
+**Inputs**:
 ```
 {
     "block_hash":"00000000000000000004194093f23783768d7904234c0dbba53e85bce6ecd8b4",
@@ -138,7 +138,7 @@ Inputs:
 block = bitcoin.chain.get_block("00000000000000000004194093f23783768d7904234c0dbba53e85bce6ecd8b4",1)
 print(block)
 ```
-Outputs:
+**Outputs**:
 ```
 {
   'hash': '00000000000000000004194093f23783768d7904234c0dbba53e85bce6ecd8b4',
@@ -172,7 +172,7 @@ Outputs:
 block = bitcoin.chain.get_block("00000000000000000004194093f23783768d7904234c0dbba53e85bce6ecd8b4",2)
 print(block)
 ```
-Outputs:
+**Outputs**:
 ```
 {
   "hash": "00000000000000000005dab6d9ad630d162b9912d211bac7eff372da3ab9fb5d",
@@ -401,7 +401,7 @@ Outputs:
 # raw
 ## get_raw_transaction
 This function can't work if you did not set 'tindex=1' when you run bitcoind
-Inputs:
+**Inputs**:
 ```
 "tx_id":"f68394a5fa08907fbdd049401a4da25b10bd57f9301822747a23830fe328de6e"
 ```
@@ -409,13 +409,13 @@ Inputs:
 rt = bitcoin.raw.get_raw_transaction("f68394a5fa08907fbdd049401a4da25b10bd57f9301822747a23830fe328de6e")
 print(rt)
 ```
-Outputs:
+**Outputs**:
 ```
 "020000000001010000000000000000000000000000000000000000000000000000000000000000ffffffff1f0386520a0484c35e6062696e616e63652f626a4629220e4781290000000000ffffffff020e9db926000000001600143156afc4249915008020f932783319f3e610b97d0000000000000000266a24aa21a9ed50ab3dbcc26ab26a587dddf4b98d93036e0cfd52c141eae7983775aa534f51820120000000000000000000000000000000000000000000000000000000000000000000000000"
 ```
 
 ## decode_raw_transaction
-Inputs:
+**Inputs**:
 ```
 "rt":"020000000001010000000000000000000000000000000000000000000000000000000000000000ffffffff1f0386520a0484c35e6062696e616e63652f626a4629220e4781290000000000ffffffff020e9db926000000001600143156afc4249915008020f932783319f3e610b97d0000000000000000266a24aa21a9ed50ab3dbcc26ab26a587dddf4b98d93036e0cfd52c141eae7983775aa534f51820120000000000000000000000000000000000000000000000000000000000000000000000000"
 ```
@@ -423,7 +423,7 @@ Inputs:
 tran = bitcoin.raw.decode_raw_transaction("020000000001010000000000000000000000000000000000000000000000000000000000000000ffffffff1f0386520a0484c35e6062696e616e63652f626a4629220e4781290000000000ffffffff020e9db926000000001600143156afc4249915008020f932783319f3e610b97d0000000000000000266a24aa21a9ed50ab3dbcc26ab26a587dddf4b98d93036e0cfd52c141eae7983775aa534f51820120000000000000000000000000000000000000000000000000000000000000000000000000")
 print(tran)
 ```
-Outputs:
+**Outputs**:
 ```
 {
   'txid': 'f68394a5fa08907fbdd049401a4da25b10bd57f9301822747a23830fe328de6e',
@@ -472,7 +472,7 @@ Outputs:
 # wallet
 The wallet will be automatically loaded after created, do not load it again
 ## create_wallet
-Inputs:
+**Inputs**:
 ```
 {
     "name":"nice"
@@ -482,7 +482,7 @@ Inputs:
 wa = bitcoin.wallet.create_wallet("nice")
 print(wa)
 ```
-Outputs:
+**Outputs**:
 ```
 {
   'name': 'nice',
@@ -502,7 +502,7 @@ The wallet needs to be reloaded after the bitcoind node restarts <br/>
 wa = bitcoin.wallet.load_wallet("nice")
 print(wa)
 ```
-Outputs:
+**Outputs**:
 ```
 {
     'name': 'firstwallet', 
@@ -511,17 +511,17 @@ Outputs:
 ```
 
 ## list_wallets
-Inputs:
+**Inputs**:
 
 ```
 wallets = bitcoin.wallet.list_wallets()
 print(wa)
 ```
-Outputs:
+**Outputs**:
 ```['nice', 'firstwallet']```
 
 ## encrypt_wallet
-Inputs:
+**Inputs**:
 ```
 {
     "wallet":"nice",
@@ -532,14 +532,14 @@ Inputs:
 res = bitcoin.wallet.encrypt_wallet("nice","qwe123")
 print(res)
 ```
-Outputs:
+**Outputs**:
 ```
 wallet encrypted; The keypool has been flushed and a new HD seed was generated (if you are using HD). You need to make a new backup.
 ```
 
 ## wallet_pass_phrase
 Unlock the wallet after transaction or sign in 'timeout' seconds
-Inputs:
+**Inputs**:
 ```
 {
     "wallet":"nice",
@@ -550,20 +550,20 @@ Inputs:
 ```
 bitcoin.wallet.wallet_pass_phrase("nice","qwe123")
 ```
-Outputs:
+**Outputs**:
 
 
 ## wallet_lock
 Lock the wallet <br/>
-Inputs:
+**Inputs**:
 ```
 bitcoin.wallet.wallet_lock("nice")
 ```
-Outputs:
+**Outputs**:
 
 
 ## get_new_address
-Inputs:
+**Inputs**:
 ```
 {
     "wallet":"nice",
@@ -574,13 +574,13 @@ Inputs:
 address = bitcoin.wallet.get_new_address("nice","wow")
 print(address)
 ```
-Outputs:
+**Outputs**:
 ```
 "1PXjDKw3PeDLqfFYok5bdQMnP2F1AxqmPT"
 ```
 
 ## get_balance
-Inputs:
+**Inputs**:
 ```
 {
     "wallet":"nice"
@@ -590,13 +590,13 @@ Inputs:
 balance = bitcoin.wallet.get_balance("nice")
 print(balance)
 ```
-Outputs:
+**Outputs**:
 ```
 0.0
 ```
 
 ## list_received_by_address
-Inputs:
+**Inputs**:
 ```
 {
     "wallet":"nice"
@@ -607,7 +607,7 @@ Inputs:
 res = bitcoin.wallet.list_received_by_address("nice",include_empty=True)
 print(res)
 ```
-Outputs:
+**Outputs**:
 ```
 [
   {
@@ -628,7 +628,7 @@ Outputs:
 ```
 
 ## list_received_by_label
-Inputs:
+**Inputs**:
 ```
 {
     "wallet":"nice"
@@ -639,7 +639,7 @@ Inputs:
 res = bitcoin.wallet.list_received_by_label("firstwallet",include_empty=True)
 print(res)
 ```
-Outputs:
+**Outputs**:
 ```
 [
   {
