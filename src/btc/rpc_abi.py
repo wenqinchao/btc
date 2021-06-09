@@ -97,3 +97,6 @@ class RPC:
     # mine, generate blocks
     mine_generate = "generate"
     mine_generateToAddress = "generatetoaddress"
+
+    # utils
+    util_validateAddress = "validateaddress"
