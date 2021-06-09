@@ -1,12 +1,12 @@
 # btc-cj
 A simple python package interacts with the bitcoin node, python version >=3.6 is recommend
-## Install
+# Install
 ```
 pip3 install btc-cj
 ```
-## Docs
+# Docs
 Reference: https://developer.bitcoin.org/reference/rpc/
-## Groups
+# Groups
 * [connect](#connect)
 * [chain](#chain)
     * [get_block_chain_info](#get_block_chain_info)
@@ -29,16 +29,16 @@ Reference: https://developer.bitcoin.org/reference/rpc/
     * [list_received_by_address](#list_received_by_address)
     * [list_received_by_label](#list_received_by_label)
     
-### connect 
+# connect 
 ```
 from btc.bitcoin import BitCoin
 bitcoin = BitCoin(BitCoin.HttpProvider("your rpc username", "your rpc password"))
 # The default provider is "http://127.0.0.1:8332", You can use other providers 
 bitcoin = BitCoin(BitCoin.HttpProvider("your rpc username", "your rpc password", "your provider "))
 ```
-### chain
+# chain
 
-#### get_block_chain_info
+## get_block_chain_info
 Inputs:
 ```None```
 ```
@@ -90,7 +90,7 @@ Outputs:
 }
 ```
 
-#### get_block_count
+## get_block_count
 Inputs:
 ```None```
 ```
@@ -100,7 +100,7 @@ print(block_count)
 Outputs:
 ```676487```
 
-#### get_latest_block_hash
+## get_latest_block_hash
 Inputs:
 ```None```
 ```
@@ -112,7 +112,7 @@ Outputs:
 "00000000000000000001568e72a26b2bed6507a2ad59a3693c1df544298aa290"
 ```
 
-#### get_block_hash
+## get_block_hash
 Inputs:
 ```
 {"height":676486}
@@ -126,7 +126,7 @@ Outputs:
 "00000000000000000004194093f23783768d7904234c0dbba53e85bce6ecd8b4"
 ```
 
-#### get_block
+## get_block
 Inputs:
 ```
 {
@@ -398,8 +398,8 @@ Outputs:
 
 ```
 
-### raw
-#### get_raw_transaction
+# raw
+## get_raw_transaction
 This function can't work if you did not set 'tindex=1' when you run bitcoind
 Inputs:
 ```
@@ -414,7 +414,7 @@ Outputs:
 "020000000001010000000000000000000000000000000000000000000000000000000000000000ffffffff1f0386520a0484c35e6062696e616e63652f626a4629220e4781290000000000ffffffff020e9db926000000001600143156afc4249915008020f932783319f3e610b97d0000000000000000266a24aa21a9ed50ab3dbcc26ab26a587dddf4b98d93036e0cfd52c141eae7983775aa534f51820120000000000000000000000000000000000000000000000000000000000000000000000000"
 ```
 
-#### decode_raw_transaction
+## decode_raw_transaction
 Inputs:
 ```
 "rt":"020000000001010000000000000000000000000000000000000000000000000000000000000000ffffffff1f0386520a0484c35e6062696e616e63652f626a4629220e4781290000000000ffffffff020e9db926000000001600143156afc4249915008020f932783319f3e610b97d0000000000000000266a24aa21a9ed50ab3dbcc26ab26a587dddf4b98d93036e0cfd52c141eae7983775aa534f51820120000000000000000000000000000000000000000000000000000000000000000000000000"
@@ -469,9 +469,9 @@ Outputs:
 }
 ```
 
-### wallet
+# wallet
 The wallet will be automatically loaded after created, do not load it again
-#### create_wallet
+## create_wallet
 Inputs:
 ```
 {
@@ -490,7 +490,7 @@ Outputs:
 }
 ```
 
-#### load_wallet
+## load_wallet
 The wallet needs to be reloaded after the bitcoind node restarts <br/>
 **Inputs**:
 ```
@@ -510,7 +510,7 @@ Outputs:
 }
 ```
 
-#### list_wallets
+## list_wallets
 Inputs:
 
 ```
@@ -520,7 +520,7 @@ print(wa)
 Outputs:
 ```['nice', 'firstwallet']```
 
-#### encrypt_wallet
+## encrypt_wallet
 Inputs:
 ```
 {
@@ -537,7 +537,7 @@ Outputs:
 wallet encrypted; The keypool has been flushed and a new HD seed was generated (if you are using HD). You need to make a new backup.
 ```
 
-#### wallet_pass_phrase
+## wallet_pass_phrase
 Unlock the wallet after transaction or sign in 'timeout' seconds
 Inputs:
 ```
@@ -553,8 +553,8 @@ bitcoin.wallet.wallet_pass_phrase("nice","qwe123")
 Outputs:
 
 
-#### wallet_lock
-Lock the wallet
+## wallet_lock
+Lock the wallet <br/>
 Inputs:
 ```
 bitcoin.wallet.wallet_lock("nice")
@@ -562,7 +562,7 @@ bitcoin.wallet.wallet_lock("nice")
 Outputs:
 
 
-#### get_new_address
+## get_new_address
 Inputs:
 ```
 {
@@ -579,7 +579,7 @@ Outputs:
 "1PXjDKw3PeDLqfFYok5bdQMnP2F1AxqmPT"
 ```
 
-#### get_balance
+## get_balance
 Inputs:
 ```
 {
@@ -595,7 +595,7 @@ Outputs:
 0.0
 ```
 
-#### list_received_by_address
+## list_received_by_address
 Inputs:
 ```
 {
@@ -627,7 +627,7 @@ Outputs:
 ]
 ```
 
-#### list_received_by_label
+## list_received_by_label
 Inputs:
 ```
 {
@@ -666,6 +666,6 @@ Outputs:
 ```
 
 
-### Tips
+# Tips
 - The default parameters of these functions are not specified in the document, you need to check the source code by yourself.
 - The current document is incomplete, I will gradually improve the document later.
