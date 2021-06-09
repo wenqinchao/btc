@@ -28,7 +28,9 @@ Reference: https://developer.bitcoin.org/reference/rpc/
     * [get_balance](#get_balance)
     * [list_received_by_address](#list_received_by_address)
     * [list_received_by_label](#list_received_by_label)
-    
+* [utils](#utils)
+    * [validate_address](#validate_address)
+
 # connect 
 ```
 from btc.bitcoin import BitCoin
@@ -506,7 +508,7 @@ print(wa)
 **Outputs**:
 ```
 {
-    'name': 'firstwallet', 
+    'name': 'nice', 
     'warning': ''
 }
 ```
@@ -665,7 +667,21 @@ print(res)
   }
 ]
 ```
-
+# utils
+## validate_address
+Validate input address, return True if address is legal <br/>
+**Inputs**
+```
+  {'address':'34wcANsazFutEiTegvsYUCZz5NDmsLg9Jh'}
+```
+```angular2html
+  res = bitcoin.utils.validate_address("34wcANsazFutEiTegvsYUCZz5NDmsLg9Jh")
+  print(res)
+```
+**Outputs**
+```angular2html
+    True
+```
 
 # Tips
 - The default parameters of these functions are not specified in the document, you need to check the source code by yourself.

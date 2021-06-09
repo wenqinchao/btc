@@ -31,7 +31,7 @@ class BitCoin:
         return self._raw
 
     @property
-    def util(self):
+    def utils(self):
         return self._utils
 
 
