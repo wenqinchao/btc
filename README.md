@@ -43,6 +43,7 @@ bitcoin = BitCoin(BitCoin.HttpProvider("your rpc username", "your rpc password",
 ## get_block_chain_info
 **Inputs**:
 ```None```
+**Example**
 ```
 chain_info = bitcoin.chain.get_block_chain_info()
 print(chain_info)
@@ -95,6 +96,7 @@ print(chain_info)
 ## get_block_count
 **Inputs**:
 ```None```
+**Example**
 ```
 block_count = bitcoin.chain.get_block_count()
 print(block_count)
@@ -106,6 +108,7 @@ print(block_count)
 **Inputs**:
 ```None```
 ```
+**Example**
 block_hash = bitcoin.chain.get_latest_block_hash()
 print(block_hash)
 ```
@@ -119,6 +122,7 @@ print(block_hash)
 ```
 {"height":676486}
 ```
+**Example**
 ```
 block_hash = bitcoin.chain.get_block_hash(676486)
 print(block_hash)
@@ -136,6 +140,7 @@ print(block_hash)
     "verbosity":(1 or 2)
 }
 ```
+**Example**
 ```
 block = bitcoin.chain.get_block("00000000000000000004194093f23783768d7904234c0dbba53e85bce6ecd8b4",1)
 print(block)
@@ -170,8 +175,9 @@ print(block)
   'nextblockhash': '000000000000000000042264a471acdf4b9b3cbd98e585072f1505f092b7d3d3'
 }
 ```
-verbosity = 2
+**Example**
 ```
+# verbosity = 2
 block = bitcoin.chain.get_block("00000000000000000004194093f23783768d7904234c0dbba53e85bce6ecd8b4",2)
 print(block)
 ```
@@ -408,6 +414,7 @@ This function can't work if you did not set 'tindex=1' when you run bitcoind <br
 ```
 "tx_id":"f68394a5fa08907fbdd049401a4da25b10bd57f9301822747a23830fe328de6e"
 ```
+**Example**
 ```
 rt = bitcoin.raw.get_raw_transaction("f68394a5fa08907fbdd049401a4da25b10bd57f9301822747a23830fe328de6e")
 print(rt)
@@ -422,6 +429,7 @@ print(rt)
 ```
 "rt":"020000000001010000000000000000000000000000000000000000000000000000000000000000ffffffff1f0386520a0484c35e6062696e616e63652f626a4629220e4781290000000000ffffffff020e9db926000000001600143156afc4249915008020f932783319f3e610b97d0000000000000000266a24aa21a9ed50ab3dbcc26ab26a587dddf4b98d93036e0cfd52c141eae7983775aa534f51820120000000000000000000000000000000000000000000000000000000000000000000000000"
 ```
+**Example**
 ```
 tran = bitcoin.raw.decode_raw_transaction("020000000001010000000000000000000000000000000000000000000000000000000000000000ffffffff1f0386520a0484c35e6062696e616e63652f626a4629220e4781290000000000ffffffff020e9db926000000001600143156afc4249915008020f932783319f3e610b97d0000000000000000266a24aa21a9ed50ab3dbcc26ab26a587dddf4b98d93036e0cfd52c141eae7983775aa534f51820120000000000000000000000000000000000000000000000000000000000000000000000000")
 print(tran)
@@ -481,6 +489,7 @@ The wallet will be automatically loaded after created, do not load it again
     "name":"nice"
 }
 ```
+**Example**
 ```
 wa = bitcoin.wallet.create_wallet("nice")
 print(wa)
@@ -501,6 +510,7 @@ The wallet needs to be reloaded after the bitcoind node restarts <br/>
     "wallet":"nice"
 }
 ```
+**Example**
 ```
 wa = bitcoin.wallet.load_wallet("nice")
 print(wa)
@@ -515,7 +525,8 @@ print(wa)
 
 ## list_wallets
 **Inputs**:
-
+```None```
+**Example**
 ```
 wallets = bitcoin.wallet.list_wallets()
 print(wa)
@@ -531,6 +542,7 @@ print(wa)
     "pass_phrase":"qwe123"    
 }
 ```
+**Example**
 ```
 res = bitcoin.wallet.encrypt_wallet("nice","qwe123")
 print(res)
@@ -550,15 +562,23 @@ Unlock the wallet after transaction or sign in 'timeout' seconds <br/>
     "timeout": default 10    
 }
 ```
+**Example**
 ```
 bitcoin.wallet.wallet_pass_phrase("nice","qwe123")
 ```
 **Outputs**:
+```None```
 
 
 ## wallet_lock
 Lock the wallet <br/>
 **Inputs**:
+```
+{
+  "wallet":"nice"
+}
+```
+**Example**
 ```
 bitcoin.wallet.wallet_lock("nice")
 ```
@@ -573,6 +593,7 @@ bitcoin.wallet.wallet_lock("nice")
     "label":"wow"
 }
 ```
+**Example**
 ```
 address = bitcoin.wallet.get_new_address("nice","wow")
 print(address)
@@ -589,6 +610,7 @@ print(address)
     "wallet":"nice"
 }
 ```
+**Example**
 ```
 balance = bitcoin.wallet.get_balance("nice")
 print(balance)
@@ -606,6 +628,7 @@ print(balance)
     "include_empty":True
 }
 ```
+**Example**
 ```
 res = bitcoin.wallet.list_received_by_address("nice",include_empty=True)
 print(res)
@@ -638,6 +661,7 @@ print(res)
     "include_empty":True
 }
 ```
+**Example**
 ```
 res = bitcoin.wallet.list_received_by_label("firstwallet",include_empty=True)
 print(res)
@@ -674,6 +698,7 @@ Validate input address, return True if address is legal <br/>
 ```
   {'address':'34wcANsazFutEiTegvsYUCZz5NDmsLg9Jh'}
 ```
+**Example**
 ```angular2html
   res = bitcoin.utils.validate_address("34wcANsazFutEiTegvsYUCZz5NDmsLg9Jh")
   print(res)
