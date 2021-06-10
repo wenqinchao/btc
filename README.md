@@ -26,8 +26,10 @@ Reference: https://developer.bitcoin.org/reference/rpc/
     * [wallet_lock](#wallet_lock)
     * [get_new_address](#get_new_address)
     * [get_balance](#get_balance)
+    * [send_to_address](#send_to_address)
     * [list_received_by_address](#list_received_by_address)
     * [list_received_by_label](#list_received_by_label)
+    * [list_transactions](#list_transactions)
 * [utils](#utils)
     * [validate_address](#validate_address)
 
@@ -35,20 +37,22 @@ Reference: https://developer.bitcoin.org/reference/rpc/
 ```
 from btc.bitcoin import BitCoin
 bitcoin = BitCoin(BitCoin.HttpProvider("your rpc username", "your rpc password"))
-# The default provider is "http://127.0.0.1:8332", You can use other providers 
+# The default rpc endpoint is "http://127.0.0.1:8332"
 bitcoin = BitCoin(BitCoin.HttpProvider("your rpc username", "your rpc password", "your provider "))
 ```
 # chain
 
 ## get_block_chain_info
-**Inputs**:
-```None```
-**Example**
+**Inputs:**
+```
+None
+```
+**Example:**
 ```
 chain_info = bitcoin.chain.get_block_chain_info()
 print(chain_info)
 ```
-**Outputs**:
+**Outputs:**
 ```
 {
   'chain': 'main',
@@ -94,58 +98,62 @@ print(chain_info)
 ```
 
 ## get_block_count
-**Inputs**:
-```None```
-**Example**
+**Inputs:**
+```
+None
+```
+**Example:**
 ```
 block_count = bitcoin.chain.get_block_count()
 print(block_count)
 ```
-**Outputs**:
+**Outputs:**
 ```676487```
 
 ## get_latest_block_hash
-**Inputs**:
-```None```
+**Inputs:**
 ```
-**Example**
+None
+```
+**Example:**
+```
 block_hash = bitcoin.chain.get_latest_block_hash()
 print(block_hash)
 ```
-**Outputs**:
+**Outputs:**
 ```
 "00000000000000000001568e72a26b2bed6507a2ad59a3693c1df544298aa290"
 ```
 
 ## get_block_hash
-**Inputs**:
+**Inputs:**
 ```
 {"height":676486}
 ```
-**Example**
+**Example:**
 ```
 block_hash = bitcoin.chain.get_block_hash(676486)
 print(block_hash)
 ```
-**Outputs**:
+**Outputs:**
 ```
 "00000000000000000004194093f23783768d7904234c0dbba53e85bce6ecd8b4"
 ```
 
 ## get_block
-**Inputs**:
+**Inputs:**
 ```
 {
     "block_hash":"00000000000000000004194093f23783768d7904234c0dbba53e85bce6ecd8b4",
     "verbosity":(1 or 2)
 }
 ```
-**Example**
+**Example:**
 ```
 block = bitcoin.chain.get_block("00000000000000000004194093f23783768d7904234c0dbba53e85bce6ecd8b4",1)
 print(block)
 ```
-**Outputs**:
+**Outputs:**
 ```
 {
   'hash': '00000000000000000004194093f23783768d7904234c0dbba53e85bce6ecd8b4',
@@ -175,13 +183,13 @@ print(block)
   'nextblockhash': '000000000000000000042264a471acdf4b9b3cbd98e585072f1505f092b7d3d3'
 }
 ```
-**Example**
+**Example:**
 ```
 # verbosity = 2
 block = bitcoin.chain.get_block("00000000000000000004194093f23783768d7904234c0dbba53e85bce6ecd8b4",2)
 print(block)
 ```
-**Outputs**:
+**Outputs:**
 ```
 {
   "hash": "00000000000000000005dab6d9ad630d162b9912d211bac7eff372da3ab9fb5d",
@@ -410,31 +418,31 @@ print(block)
 # raw
 ## get_raw_transaction
 This function can't work if you did not set 'tindex=1' when you run bitcoind <br/>
-**Inputs**:
+**Inputs:**
 ```
 "tx_id":"f68394a5fa08907fbdd049401a4da25b10bd57f9301822747a23830fe328de6e"
 ```
-**Example**
+**Example:**
 ```
 rt = bitcoin.raw.get_raw_transaction("f68394a5fa08907fbdd049401a4da25b10bd57f9301822747a23830fe328de6e")
 print(rt)
 ```
-**Outputs**:
+**Outputs:**
 ```
 "020000000001010000000000000000000000000000000000000000000000000000000000000000ffffffff1f0386520a0484c35e6062696e616e63652f626a4629220e4781290000000000ffffffff020e9db926000000001600143156afc4249915008020f932783319f3e610b97d0000000000000000266a24aa21a9ed50ab3dbcc26ab26a587dddf4b98d93036e0cfd52c141eae7983775aa534f51820120000000000000000000000000000000000000000000000000000000000000000000000000"
 ```
 
 ## decode_raw_transaction
-**Inputs**:
+**Inputs:**
 ```
 "rt":"020000000001010000000000000000000000000000000000000000000000000000000000000000ffffffff1f0386520a0484c35e6062696e616e63652f626a4629220e4781290000000000ffffffff020e9db926000000001600143156afc4249915008020f932783319f3e610b97d0000000000000000266a24aa21a9ed50ab3dbcc26ab26a587dddf4b98d93036e0cfd52c141eae7983775aa534f51820120000000000000000000000000000000000000000000000000000000000000000000000000"
 ```
-**Example**
+**Example:**
 ```
 tran = bitcoin.raw.decode_raw_transaction("020000000001010000000000000000000000000000000000000000000000000000000000000000ffffffff1f0386520a0484c35e6062696e616e63652f626a4629220e4781290000000000ffffffff020e9db926000000001600143156afc4249915008020f932783319f3e610b97d0000000000000000266a24aa21a9ed50ab3dbcc26ab26a587dddf4b98d93036e0cfd52c141eae7983775aa534f51820120000000000000000000000000000000000000000000000000000000000000000000000000")
 print(tran)
 ```
-**Outputs**:
+**Outputs:**
 ```
 {
   'txid': 'f68394a5fa08907fbdd049401a4da25b10bd57f9301822747a23830fe328de6e',
@@ -483,18 +491,18 @@ print(tran)
 # wallet
 The wallet will be automatically loaded after created, do not load it again
 ## create_wallet
-**Inputs**:
+**Inputs:**
 ```
 {
     "name":"nice"
 }
 ```
-**Example**
+**Example:**
 ```
 wa = bitcoin.wallet.create_wallet("nice")
 print(wa)
 ```
-**Outputs**:
+**Outputs:**
 ```
 {
   'name': 'nice',
@@ -504,18 +512,18 @@ print(wa)
 
 ## load_wallet
 The wallet needs to be reloaded after the bitcoind node restarts <br/>
-**Inputs**:
+**Inputs:**
 ```
 {
     "wallet":"nice"
 }
 ```
-**Example**
+**Example:**
 ```
 wa = bitcoin.wallet.load_wallet("nice")
 print(wa)
 ```
-**Outputs**:
+**Outputs:**
 ```
 {
     'name': 'nice', 
@@ -524,37 +532,39 @@ print(wa)
 ```
 
 ## list_wallets
-**Inputs**:
-```None```
-**Example**
+**Inputs:**
+```
+None
+```
+**Example:**
 ```
 wallets = bitcoin.wallet.list_wallets()
 print(wa)
 ```
-**Outputs**:
+**Outputs:**
 ```['nice', 'firstwallet']```
 
 ## encrypt_wallet
-**Inputs**:
+**Inputs:**
 ```
 {
     "wallet":"nice",
     "pass_phrase":"qwe123"    
 }
 ```
-**Example**
+**Example:**
 ```
 res = bitcoin.wallet.encrypt_wallet("nice","qwe123")
 print(res)
 ```
-**Outputs**:
+**Outputs:**
 ```
 wallet encrypted; The keypool has been flushed and a new HD seed was generated (if you are using HD). You need to make a new backup.
 ```
 
 ## wallet_pass_phrase
 Unlock the wallet after transaction or sign in 'timeout' seconds <br/>
-**Inputs**:
+**Inputs:**
 ```
 {
     "wallet":"nice",
@@ -562,78 +572,101 @@ Unlock the wallet after transaction or sign in 'timeout' seconds <br/>
     "timeout": default 10    
 }
 ```
-**Example**
+**Example:**
 ```
 bitcoin.wallet.wallet_pass_phrase("nice","qwe123")
 ```
-**Outputs**:
-```None```
+**Outputs:**
+```
+None
+```
 
 
 ## wallet_lock
 Lock the wallet <br/>
-**Inputs**:
+**Inputs:**
 ```
 {
   "wallet":"nice"
 }
 ```
-**Example**
+**Example:**
 ```
 bitcoin.wallet.wallet_lock("nice")
 ```
-**Outputs**:
-
+**Outputs:**
+```
+None
+```
 
 ## get_new_address
-**Inputs**:
+**Inputs:**
 ```
 {
     "wallet":"nice",
     "label":"wow"
 }
 ```
-**Example**
+**Example:**
 ```
 address = bitcoin.wallet.get_new_address("nice","wow")
 print(address)
 ```
-**Outputs**:
+**Outputs:**
 ```
 "1PXjDKw3PeDLqfFYok5bdQMnP2F1AxqmPT"
 ```
 
 ## get_balance
-**Inputs**:
+**Inputs:**
 ```
 {
     "wallet":"nice"
 }
 ```
-**Example**
+**Example:**
 ```
 balance = bitcoin.wallet.get_balance("nice")
 print(balance)
 ```
-**Outputs**:
+**Outputs:**
 ```
 0.0
 ```
-
+## send_to_address
+**Inputs:**
+```
+{
+    "wallet":"nice",
+    "address":"34SVsJB3ypby7rqeK5z9vAf9Y3jE39vZhk",
+    "num":0.007
+}
+```
+**Example:**
+```
+    # Unlock wallet first if your wallet is encrypted
+    bitcoin.wallet.wallet_pass_phrase(wallet="nice", "your wallet pass")
+    trans_hash = bitcoin.wallet.send_to_address(wallet="nice", address=address, amount=num)
+    bitcoin.wallet.wallet_lock("nice")
+```
+**Outputs:**
+```
+e744d19e20e958dabe37480693ca15ea311512b79370ee3751f1db404f68086a
+```
 ## list_received_by_address
-**Inputs**:
+**Inputs:**
 ```
 {
     "wallet":"nice"
     "include_empty":True
 }
 ```
-**Example**
+**Example:**
 ```
 res = bitcoin.wallet.list_received_by_address("nice",include_empty=True)
 print(res)
 ```
-**Outputs**:
+**Outputs:**
 ```
 [
   {
@@ -654,19 +687,19 @@ print(res)
 ```
 
 ## list_received_by_label
-**Inputs**:
+**Inputs:**
 ```
 {
     "wallet":"nice"
     "include_empty":True
 }
 ```
-**Example**
+**Example:**
 ```
 res = bitcoin.wallet.list_received_by_label("firstwallet",include_empty=True)
 print(res)
 ```
-**Outputs**:
+**Outputs:**
 ```
 [
   {
@@ -691,6 +724,127 @@ print(res)
   }
 ]
 ```
+
+## list_transactions
+List all transactions of the input wallet <br/>
+**Inputs:**
+```
+{
+    "wallet":"nice"
+}
+```
+**Example:**
+```
+res = bitcoin.wallet.list_transactions("nice")
+print(res)
+```
+**Outputs:**
+```
+[{
+		'address': '114WWGL9a48riuwJ7dRXmTLB5byuBoKa1c',
+		'category': 'receive',
+		'amount': 0.0003,
+		'label': '',
+		'vout': 0,
+		'confirmations': 106,
+		'blockhash': '000000000000000000064e7b027635dc74f67ad07f5ba663f20f13c8e4e43cf6',
+		'blockheight': 686968,
+		'blockindex': 73,
+		'blocktime': 1623259242,
+		'txid': '23b865efea07e64772364a3d398de0caec8d12c1a66d60c568fac668967a2a54',
+		'walletconflicts': [],
+		'time': 1623258313,
+		'timereceived': 1623258313,
+		'bip125-replaceable': 'no'
+	},
+	{
+		'address': '1Bysn2ke1116PA95bnwBckV79VXhbHaPKH',
+		'category': 'receive',
+		'amount': 0.005955,
+		'label': '',
+		'vout': 18,
+		'confirmations': 103,
+		'blockhash': '0000000000000000000a16f6075a718ab2d39715518d4f1e6306eb8c0ac3e513',
+		'blockheight': 686971,
+		'blockindex': 151,
+		'blocktime': 1623261342,
+		'txid': 'a0a997e2f2ced0d71547cb976eb91c722f9b084e3d298df5ef2f4b7d39a1e31c',
+		'walletconflicts': [],
+		'time': 1623260819,
+		'timereceived': 1623260819,
+		'bip125-replaceable': 'no'
+	},
+	{
+		'address': '34SVsJB3ypby7rqeK5z9vAf9Y3jE39vZhk',
+		'category': 'send',
+		'amount': -0.06,
+		'vout': 1,
+		'fee': -9.903e-05,
+		'confirmations': 3,
+		'blockhash': '00000000000000000009fc9175f79c95124a8c77e06195777eb5ece311da4c91',
+		'blockheight': 687071,
+		'blockindex': 1488,
+		'blocktime': 1623338419,
+		'txid': '439e56deee13966990b30f0af679f6be09a432513cac00bbfe35a674a1a44ece',
+		'walletconflicts': [],
+		'time': 1623336129,
+		'timereceived': 1623336129,
+		'bip125-replaceable': 'no',
+		'abandoned': False
+	},
+	{
+		'address': '34SVsJB3ypby7rqeK5z9vAf9Y3jE39vZhk',
+		'category': 'send',
+		'amount': -0.007,
+		'vout': 1,
+		'fee': -0.00015745,
+		'confirmations': 3,
+		'blockhash': '00000000000000000009fc9175f79c95124a8c77e06195777eb5ece311da4c91',
+		'blockheight': 687071,
+		'blockindex': 1489,
+		'blocktime': 1623338419,
+		'txid': 'e744d19e20e958dabe37480693ca15ea311512b79370ee3751f1db404f68086a',
+		'walletconflicts': [],
+		'time': 1623336414,
+		'timereceived': 1623336414,
+		'bip125-replaceable': 'no',
+		'abandoned': False
+	},
+	{
+		'address': '1CjYyNrVMSZ1B8XbcBrGCWeLbd5TiB3A34',
+		'category': 'receive',
+		'amount': 0.00352522,
+		'label': '',
+		'vout': 22,
+		'confirmations': 4,
+		'blockhash': '000000000000000000005177781815936656959e2e90fcdef55b7b1ef3f7e778',
+		'blockheight': 687070,
+		'blockindex': 255,
+		'blocktime': 1623338159,
+		'txid': 'b9d66319ffd44a4d0c6598e1f7c1ad5632b48a194f41cdf0add8c52d4b1c6141',
+		'walletconflicts': [],
+		'time': 1623336850,
+		'timereceived': 1623336850,
+		'bip125-replaceable': 'no'
+	},
+	{
+		'address': '1z7DPq9rEKayDQPz2azpzzdWDvmxmteog',
+		'category': 'receive',
+		'amount': 0.0412097,
+		'label': '',
+		'vout': 25,
+		'confirmations': 0,
+		'trusted': False,
+		'txid': '2cd6d223587adfa310fe97aa5d324cb37f3ea60db7ad39b25fdce4f117a75345',
+		'walletconflicts': [],
+		'time': 1623339013,
+		'timereceived': 1623339013,
+		'bip125-replaceable': 'no'
+	}
+]
+```
+
+
 # utils
 ## validate_address
 Validate input address, return True if address is legal <br/>
@@ -698,7 +852,7 @@ Validate input address, return True if address is legal <br/>
 ```
   {'address':'34wcANsazFutEiTegvsYUCZz5NDmsLg9Jh'}
 ```
-**Example**
+**Example:**
 ```angular2html
   res = bitcoin.utils.validate_address("34wcANsazFutEiTegvsYUCZz5NDmsLg9Jh")
   print(res)
