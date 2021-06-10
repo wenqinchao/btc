@@ -17,7 +17,7 @@ class JSONBaseProvider:
             res = resp.get("result")
             return res
         else:
-            raise error
+            raise Exception(error)
 
     def encode_rpc_request(self, method: RPCEndpoint, params: Any):
         rpc_dict = {
